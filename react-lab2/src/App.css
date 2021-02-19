@@ -1,0 +1,64 @@
+h1 {
+  text-align: center;
+}
+
+.container{
+  text-align: center;
+}
+
+.card {
+  display: inline-block;
+  vertical-align: top;
+  font-family: system-ui;
+  background: #f06d06;
+  color: white;
+  text-align: center;
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.children{
+  font-style: italic;
+}
+
+.lecturer{
+  color: grey;
+  font-weight: bold;
+}
+
+.hide{
+  color: white;
+  font-size: smaller;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.card {
+  display: inline-block;
+  vertical-align: top;
+  font-family: system-ui;
+  background: #f06d06;
+  color: white;
+  text-align: center;
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+}
+
+.description {
+  display: inline-block;
+  font-family: system-ui;
+  background: grey;
+  color: white;
+  text-align: justify;
+  width: 830px;
+  height: 250px;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+}
