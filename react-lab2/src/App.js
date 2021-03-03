@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import Subject from './components/subject';
 import React, { useState } from 'react';
-
+import Subject from './components/subject';
 
 function App() {
+
   const [ subjectsState, setSubjectsState ] = useState({
     subjects: [
       { id: 1, title: "Web App Development", year: 3, lecturer: "Rosanne Birney", description: "This module approaches web application development from an apps and services perspective, as opposed to the monolithic, server-side rendering model. Services will be formulated as REST APIs (Representational State Transfer Application Program Interface), while multiple service consumer forms will be considered, including Single Page Apps (SPA) and other services. The principles and patterns underpinning the design of both components (SPA and REST API ) will be examined as well as the fine-grained aspects of the underlying communication protocol." },
@@ -18,7 +18,7 @@ function App() {
     title: "",
     description: "",
     showDesc: false
-  })
+  });
 
   const readMoreHandler = (subjectIndex) => {
     setReadmoreState({
@@ -28,19 +28,6 @@ function App() {
     })
   } 
 
-  let description = null;
-
-
-  if (readmoreState.showDesc){
-    description = (
-      <div className="description">
-        <h2>{readmoreState.title}</h2>
-        <p>{readmoreState.description}</p>
-      </div>
-    );
-  }
-
-
   const toggleSubjectsHandler = () => {
     const doesShow = subjectsState.showSubjects;
     setSubjectsState({
@@ -48,9 +35,41 @@ function App() {
       showSubjects: !doesShow
     });
   console.log(subjectsState.showSubjects);
+    if(doesShow){
+      hideReadmore();
+    }
   }
 
+  const hideCardHandler = (subjectIndex) => {
+    const subjects = [...subjectsState.subjects];
+    subjects.splice(subjectIndex, 1);
+    setSubjectsState({
+      subjects: subjects,
+      showSubjects: subjectsState.showSubjects
+    });
+  } 
+
+
+  const hideReadmore = () => {
+    setReadmoreState({
+      title: readmoreState.title,
+      description: readmoreState.description,
+      showDesc: false
+    });
+  } 
+
+
+  const style = {
+    backgroundColor: 'green',
+    color: 'white',
+    font: 'inherit',
+    border: '1px solid blue',
+    padding: '8px',
+    cursor: 'pointer',
+  };
+
   let subjects=null; 
+  let ButtonText="Show Subjects";
 
   if (subjectsState.showSubjects) {
     subjects = (
@@ -67,52 +86,33 @@ function App() {
           Read more about this subject...
           </Subject>
         })}
-      </div> 
+      </div>
     );
+    ButtonText = "Hide Subjects";
+    style.backgroundColor = 'red';
   }
 
+  let description = null;
 
-  const hideCardHandler = (subjectIndex) => {
-    const subjects = [...subjectsState.subjects];
-    subjects.splice(subjectIndex, 1);
-    setSubjectsState({
-      subjects: subjects,
-      showSubjects: subjectsState.showSubjects
-    });
-  } 
-
-  const style = {
-    backgroundColor: 'green',
-    color: 'white',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px',
-    cursor: 'pointer',
-  };
-
-
-const hideStyle = {
-  backgroundColor: 'red',
-  color: 'white',
-  font: 'inherit',
-  border: '1px solid blue',
-  padding: '8px',
-  cursor: 'pointer',
-
-}
-
-
+  if (readmoreState.showDesc){
+    description = (
+      <div className="description">
+        <h2>{readmoreState.title}</h2>
+        <p>{readmoreState.description}</p>
+        <span className="hide" onClick={hideReadmore}>Hide this description</span>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
       <h1>Hi, I'm a React App</h1>
-      <button onClick={toggleSubjectsHandler} style={style}>Show Subjects</button>
+      <button onClick={toggleSubjectsHandler} style={style}>{ButtonText}</button>
       <br />
       {subjects}
       {description}
     </div>
   );
-
 }
 
 export default App;
