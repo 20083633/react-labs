@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Menu from '../../components/Menu/Menu';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Message } from 'semantic-ui-react';
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
-import { Grid, Message } from 'semantic-ui-react';
 
 const orderToppings = [];
 

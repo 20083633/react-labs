@@ -38,11 +38,11 @@ const OrderSummary = (props) => {
 
     }
  
-    if ( toppingCount = 0 ) {
+  /*  if ( toppingCount = 0 ) {
         <header as='h3'>
             Start adding some toppings!
         </header>
-    }
+    } */
  
     return (
     <div>
