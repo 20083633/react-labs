@@ -28,9 +28,9 @@ const OrderModal = (props) => {
               <Button color='red' onClick={() => setOpen(false)}>
                   Go Back
               </Button>
-              <Button color='green' onClick={ () => { props.checkout(); setOpen(false); } }>
-                  Check out
-              </Button>
+              <Button color='green' disabled={props.disabled} onClick={ () => { props.checkout(); setOpen(false); } }>
+        Check out
+    </Button>
             </Modal.Actions>
       </Modal>
         </div>

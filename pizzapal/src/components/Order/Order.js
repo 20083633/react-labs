@@ -17,6 +17,7 @@ const Order = (props) => {
     toppings={props.chosenToppings}
     price={props.totalPrice}
     checkout={props.checkout}
+    disabled={props.disabled}
   />
     </Grid.Row>
   )

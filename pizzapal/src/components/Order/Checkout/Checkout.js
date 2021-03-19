@@ -21,6 +21,7 @@ const Checkout = (props) => {
             toppings = {props.toppings}
             price = {props.price}
             checkout = {props.checkout}
+            disabled={props.disabled}
         />
     </Grid.Column>
   )

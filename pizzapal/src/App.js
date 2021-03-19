@@ -1,13 +1,13 @@
 import logo from './logo.svg';
-import PizzaPal from './containers/PizzaPal/PizzaPal';
 import 'semantic-ui-css/semantic.min.css';
 import Layout from './components/Layout/Layout';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <Layout>
-    <PizzaPal />
-  </Layout>
+    <BrowserRouter>
+        <Layout />
+    </BrowserRouter>
   );
 }
 
