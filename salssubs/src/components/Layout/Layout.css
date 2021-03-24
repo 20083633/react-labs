@@ -2,3 +2,25 @@
     margin: 2em;
 }
 
+.ui.green.segment{
+    margin-top: 1em;
+}
+
+p{
+    font-size: 85%;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.ui.center.aligned.header.step{
+    margin-bottom: 1em;
+}
+
+.ui.tiny.centered.image
+{
+    width: 80px;
+    height: 80px;
+}
+
+.ui.divided.middle.aligned.list{
+    margin-bottom: 1em;
+}

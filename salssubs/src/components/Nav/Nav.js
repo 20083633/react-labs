@@ -6,7 +6,7 @@ const Nav = (props) => {
     <div>
     <Menu color='green' stackable inverted>
     <Menu.Item>
-      <img src='images/logo.png' alt='Pizza Pal Logo' />
+      <img src='images/logo.png' alt='Sals Subs Logo' />
     </Menu.Item>
 
     <Menu.Item active>
