@@ -6,7 +6,7 @@ const Command = (props) => {
     <Grid.Column mobile={4} computer={2} textAlign='center'>
     <p>{props.alt}</p>
     <Button.Group size='mini'>
-        <Button color='blue' icon>
+        <Button color='blue' icon onClick={props.added}>
             <Icon name='plus' />
         </Button>
         <Button color='red' icon>

@@ -46,10 +46,20 @@ const PizzaPal = (props) => {
         ]
       }); */
 
-  const [orderState, setOrderState] = useState({
-        totalPrice: 5, 
-        chosenToppings: []
+      const [orderState, setOrderState] = useState({
+        totalPrice: 
+          props.location.state ? 
+          props.location.state.order.totalPrice : 5, 
+        chosenToppings: 
+          props.location.state ? 
+          props.location.state.order.chosenToppings: orderToppings
       });
+      
+      if (props.location.state) {
+        orderToppings = props.location.state.order.chosenToppings;
+      }
+
+      window.history.replaceState('/', undefined);
       
 
   const addToppingHandler = (id) => {
@@ -114,7 +124,14 @@ const PizzaPal = (props) => {
     
   
   const checkoutHandler = () => {
-
+    props.history.push({
+      pathname: 'place-order', 
+      state: {
+        order: orderState, 
+        menu: menuState.toppings
+      }
+    });
+/*
     // get order from orderState
     let order = orderState;
 
@@ -156,8 +173,8 @@ const PizzaPal = (props) => {
       setMenuState({toppings: menuState.toppings, error: true});
       alert('Something went wrong :(');
       console.log(error);
-      });
-}
+      }); */
+} 
 
 let checkoutDisabled = true;
 

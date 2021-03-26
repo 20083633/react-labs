@@ -9,10 +9,11 @@ const Commands = (props) => {
             Step 1: Choose your fillings
         </Header>
         <Grid>
-            {props.menu.map((toppings, index) => {
+            {props.menu.map((fillings, index) => {
             return <Command
-                key={toppings.id}
-                alt={toppings.alt}
+                key={fillings.id}
+                alt={fillings.alt}
+                added={() => props.fillingAdded(fillings.id)}
             />
             })}
         </Grid>

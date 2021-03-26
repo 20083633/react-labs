@@ -3,11 +3,12 @@ import Menu from '../../components/Menu/Menu';
 import { Grid } from 'semantic-ui-react';
 import Order from '../../components/Order/Order';
 
+const orderFillings = [];
 
 const SalsSubs = (props) => {
 
     const [menuState, setMenuState] = useState({
-        toppings: [
+        fillings: [
           { id: 0, name: 'meatballs', price: 2, image: 'images/toppings/meatballs.jpg', alt: 'Meatballs' },
           { id: 1, name: 'chicken', price: 1, image: 'images/toppings/chicken.webp', alt: 'Chicken' },
           { id: 2, name: 'steak', price: 1.5, image: 'images/toppings/steak.png', alt: 'Steak' },
@@ -28,16 +29,51 @@ const SalsSubs = (props) => {
         ]
       });
 
+      const [orderState, setOrderState] = useState({
+        totalPrice: 5, 
+        chosenFillings: []
+      });
+      
+      const addFillingHandler = (id) => {
+        const index = menuState.fillings.findIndex(filling => filling.id === id);
+        // Save the name and price of the chosen topping
+        const chosenFilling = {
+        id: menuState.fillings[index].id,
+        name: menuState.fillings[index].alt,
+        price: menuState.fillings[index].price
+    };
+
+        // Add chosen topping object to updatedToppings array
+        orderFillings.push(chosenFilling);
+
+        // Calculate the new price
+         const newPrice = orderState.totalPrice + menuState.fillings[index].price;
+
+        // Update the order state with the new price and updated toppings array
+        setOrderState({
+          totalPrice: newPrice,
+          chosenFillings: orderFillings
+        });
+        console.log(orderState);
+      }
+
+      const removeFillingHandler = (id) => {
+        console.log(id);
+      }
 
   return (
           <Grid divided='vertically' stackable>
         <Grid.Row centered>
-        <Menu menu={menuState.toppings} />
+        <Menu menu={menuState.fillings} />
         </Grid.Row>
         <Grid.Row>
-        <Order menu={menuState.toppings}/>
+        <Order 
+      menu={menuState.fillings}
+      fillingAdded={addFillingHandler}
+      />
         </Grid.Row>
   </Grid>
+
   )
 };
 
