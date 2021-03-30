@@ -11,12 +11,12 @@ const Menu = (props) => {
             </Header>
         </Segment>
         <Grid>
-            {props.menu.map((toppings, index) => {
+            {props.menu.map((fillings, index) => {
             return <MenuItem 
-                key={toppings.id}
-                image={toppings.image}
-                alt={toppings.alt}
-                price={toppings.price}
+                key={fillings.id}
+                image={fillings.image}
+                alt={fillings.alt}
+                price={fillings.price}
             />
             })}
         </Grid>

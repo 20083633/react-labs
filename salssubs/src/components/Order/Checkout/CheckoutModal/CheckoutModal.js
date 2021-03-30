@@ -10,20 +10,24 @@ const CheckoutModal = (props) => {
     onClose={() => setOpen(false)}
     onOpen={() => setOpen(true)}
     open={open}
-    trigger={<Button color='blue' size='large'>Order Now!</Button>}
+    trigger={<Button color='green' size='large'>Order Now!</Button>}
     >
         <Modal.Header>Confirm your choices:</Modal.Header>
         <Modal.Content>
 
-          <Summary />
+          <Summary 
+              menu = {props.menu}
+              toppings = {props.toppings}
+              price = {props.price}
+          />
 
         </Modal.Content>
         <Modal.Actions>
           <Button color='red' onClick={() => setOpen(false)}>
               Go Back
           </Button>
-          <Button color='blue' onClick={() => setOpen(false)}>
-              Check out
+          <Button color='green' disabled={props.disabled} onClick={ () => { props.checkout(); setOpen(false); } }>
+      Check out
           </Button>
         </Modal.Actions>
   </Modal>

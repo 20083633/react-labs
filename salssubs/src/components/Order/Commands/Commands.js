@@ -14,6 +14,7 @@ const Commands = (props) => {
                 key={fillings.id}
                 alt={fillings.alt}
                 added={() => props.fillingAdded(fillings.id)}
+                removed={() => props.fillingRemoved(fillings.id)}
             />
             })}
         </Grid>

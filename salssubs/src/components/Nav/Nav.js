@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu } from 'semantic-ui-react';
+import {NavLink} from 'react-router-dom';
 
 const Nav = (props) => {
   return (
@@ -9,11 +10,11 @@ const Nav = (props) => {
       <img src='images/logo.png' alt='Sals Subs Logo' />
     </Menu.Item>
 
-    <Menu.Item active>
+    <Menu.Item as={NavLink} to="/" exact>
       Sal's Subs
     </Menu.Item>
 
-    <Menu.Item>
+    <Menu.Item as={NavLink} to="/orders">
       Previous Orders
     </Menu.Item>
 

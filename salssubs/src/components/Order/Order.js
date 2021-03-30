@@ -8,8 +8,15 @@ const Order = (props) => {
     <Grid.Row columns={2} centered>
         <Commands menu={props.menu}
         fillingAdded = {props.fillingAdded}
+        fillingRemoved = {props.fillingRemoved}
         />
-        <Checkout />
+          <Checkout 
+            menu = {props.menu}
+            fillings={props.chosenFillings}
+            price={props.totalPrice}
+            checkout={props.checkout}
+            disabled={props.disabled}
+          />
     </Grid.Row>
   )
 };
