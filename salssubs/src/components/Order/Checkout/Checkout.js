@@ -13,13 +13,13 @@ const Checkout = (props) => {
 
         <Summary
             menu = {props.menu}
-            fillings = {props.fillings}
-            price = {props.price}
+            chosenFillings = {props.chosenFillings}
+            totalPrice = {props.totalPrice}
         />
         <CheckoutModal 
             menu = {props.menu}
-            fillings = {props.fillings}
-            price = {props.price}
+            chosenFillings = {props.chosenFillings}
+            totalPrice = {props.totalPrice}
             checkout={props.checkout}
             disabled={props.disabled}
         />

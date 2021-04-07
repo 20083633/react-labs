@@ -17,8 +17,8 @@ const CheckoutModal = (props) => {
 
           <Summary 
               menu = {props.menu}
-              toppings = {props.toppings}
-              price = {props.price}
+              chosenFillings = {props.chosenFillings}
+              totalPrice = {props.totalPrice}
           />
 
         </Modal.Content>

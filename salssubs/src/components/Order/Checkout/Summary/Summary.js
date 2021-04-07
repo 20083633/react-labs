@@ -5,7 +5,7 @@ const Summary = (props) => {
 
 let summary = null;
 
-if(props.fillings.length > 0){
+if(props.chosenFillings.length > 0){
 summary = (
         <div>
         <Header as='h3'>
@@ -13,7 +13,7 @@ summary = (
         </Header>
 
         <List divided verticalAlign='middle'>
-            {props.fillings.map((filling) => {
+            {props.chosenFillings.map((filling) => {
                 return( 
                     <List.Item key={filling.id}>
                         {filling.name}: {filling.count}
@@ -23,7 +23,7 @@ summary = (
         </List>
 
         <Header as='h4' className='h4margin'>
-            Total Price: &euro; {props.price.toFixed(2)}
+            Total Price: &euro; {props.totalPrice.toFixed(2)}
         </Header>
     </div>
       );

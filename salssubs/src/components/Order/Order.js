@@ -12,8 +12,8 @@ const Order = (props) => {
         />
           <Checkout 
             menu = {props.menu}
-            fillings={props.chosenFillings}
-            price={props.totalPrice}
+            chosenFillings={props.chosenFillings}
+            totalPrice={props.totalPrice}
             checkout={props.checkout}
             disabled={props.disabled}
           />
