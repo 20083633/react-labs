@@ -76,6 +76,60 @@ const PlaceOrder = (props) => {
             message = validation.rules[inputRule].message;
             validation.rules[inputRule].valid = false;
         }
+        else if (inputIdentifier === "form-input-name") {
+            //check for a valid name (letters and spaces only)
+    
+            let pattern = /^[A-Za-z\s]{2,30}$/;
+            let validName = pattern.test(value);
+    
+            if(validName){
+                validation.rules[inputRule].valid = true;
+            }
+            else{
+                validation.rules[inputRule].valid = false;
+                message = validation.rules[inputRule].message;
+            }
+        }
+        else if (inputIdentifier === "form-input-phone") {
+            //check for a valid phone number
+    
+            let pattern = /^[+]?[(]?[0-9]{3,5}[)]?[-\s.]?[0-9]{6,7}$/;
+            let validNum = pattern.test(value);
+    
+            if(validNum){
+                validation.rules[inputRule].valid = true;
+            }
+            else{
+                validation.rules[inputRule].valid = false;
+                message = validation.rules[inputRule].message;
+            }
+        }
+        else if (value === "Delivery") {
+            //set address to required
+            validation.rules[inputRule].valid = true; 
+            validation.rules[3].valid = false;
+            validation.rules[3].required = true;
+        }
+        else if (value === "Collection") {
+            //set address to not required
+            validation.rules[inputRule].valid = true; 
+            validation.rules[3].required = false;
+            validation.rules[3].valid = true;
+        }
+        else if (validation.rules[inputRule].required && inputIdentifier === "form-input-address") {
+            //check for a valid address (alphanumeric plus some special characters)
+    
+            let pattern = /^[#.0-9a-zA-Z\s,-]{2,50}$/;
+            let validAddress = pattern.test(value);
+    
+            if(validAddress){
+                validation.rules[inputRule].valid = true;
+            }
+            else{
+                validation.rules[inputRule].valid = false;
+                message = validation.rules[inputRule].message;
+            }
+        }
         else {
             // otherwise reset the message and set valid back to true
             message = null;
@@ -197,7 +251,7 @@ const PlaceOrder = (props) => {
            });
      }
 
-
+     let disabled = !validationState.formValid;
     console.log(customerState);
     console.log(props);
   return (
@@ -256,6 +310,7 @@ const PlaceOrder = (props) => {
                         />
                         <Form.Input
                             error={messageState.address}
+                            required={validationState.rules[3].required}
                             fluid
                             label='Address'
                             placeholder='Address'
@@ -263,7 +318,7 @@ const PlaceOrder = (props) => {
                             onChange={(event) => formChangedHandler(event, 'form-input-address', 'input')}
                         />
 
-      <Button type='submit' color='green' onClick={checkoutHandler}>Submit</Button>
+<Button type='submit' color='green' disabled={disabled} onClick={checkoutHandler}>Submit</Button>
   </Form>
                     </Segment>
             </Grid.Column>
