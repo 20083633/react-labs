@@ -4,6 +4,24 @@ const Order = require('../models/order');
 
 
 const orderController = {
+  async createOrder (request, response, next) {
+
+    const createdOrder = new Order(request.body);
+
+    try {
+      await createdOrder.save();
+    } catch (err) {
+      const error = new HttpError(
+        'Creating order failed, please try again.',
+        500
+      );
+      return next(error);
+    }
+
+    response.status(201).json({ order: createdOrder });
+},
+
+
   async getAllOrders(request, response, next) {
     let orders;
 
@@ -24,25 +42,6 @@ const orderController = {
 
     response.status(200).json({orders: orders.map(order => order.toObject({getters: true}))});
 },
-
-
-
-    async createOrder (request, response, next) {
-
-      const createdOrder = new Order(request.body);
-
-      try {
-        await createdOrder.save();
-      } catch (err) {
-        const error = new HttpError(
-          'Creating order failed, please try again.',
-          500
-        );
-        return next(error);
-      }
-
-      response.status(201).json({ order: createdOrder });
-  },
 
 };
 

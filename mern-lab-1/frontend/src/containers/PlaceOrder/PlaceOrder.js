@@ -223,53 +223,53 @@ const PlaceOrder = (props) => {
           });
     };
 
-    const checkoutHandler = () => {
+const checkoutHandler = () => {
 
-        // get order from orderState
-         let order = orderState;
+// get order from orderState
+    let order = orderState;
 
 
 
-         // create formatted date
-         let orderDate = new Date();
+    // create formatted date
+    let orderDate = new Date();
 
-         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-         const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-         let dayNum = orderDate.getDay();
-         let day = days[dayNum];
+    let dayNum = orderDate.getDay();
+    let day = days[dayNum];
 
-         let monthNum = orderDate.getMonth();
-         let month = months[monthNum];
+    let monthNum = orderDate.getMonth();
+    let month = months[monthNum];
 
-         let date = orderDate.getDate();
-         let year = orderDate.getFullYear();
+    let date = orderDate.getDate();
+    let year = orderDate.getFullYear();
 
-         // saves date in the format "Fri 19 Mar 2021"
-         let formattedDate = day + " " + date + " " + month + " " + year;
+    // saves date in the format "Fri 19 Mar 2021"
+    let formattedDate = day + " " + date + " " + month + " " + year;
 
-         // add formattedDate to order
-         order.date = formattedDate;
+    // add formattedDate to order
+    order.date = formattedDate;
 
-         // add customer details to order
-         order.details = customerState.details;
+    // add customer details to order
+    order.details = customerState.details;
 
-         axios.post('/checkout', order)
-         .then(response => {
-             props.history.push('/order-success');
-         })
-         .catch(error => {
-             console.log(error);
- 
-             let errorMsg = '';
-             if (error.response) {
-                 errorMsg = error.response.data.message;
-             } else {
-                 errorMsg = 'There was a problem creating your order';
-             }
-             setErrorState({error: true, errorMessage: errorMsg});
-         });
-     }
+    axios.post('/checkout', order)
+    .then(response => {
+        props.history.push('/order-success');
+    })
+    .catch(error => {
+        console.log(error);
+
+        let errorMsg = '';
+        if (error.response) {
+            errorMsg = error.response.data.message;
+        } else {
+            errorMsg = 'There was a problem creating your order';
+        }
+        setErrorState({error: true, errorMessage: errorMsg});
+    });
+}
 
      let disabled = !validationState.formValid;
     console.log(customerState);

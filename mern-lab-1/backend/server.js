@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const express = require('express');
 
 
-
-const routes = require('./routes');
 const HttpError = require('./utils/http-error');
 
+const routes = require('./routes');
 const app = express();
+
 app.use(bodyParser.json());
 app.use((request, response, next) => {
   response.setHeader('Access-Control-Allow-Origin', '*');

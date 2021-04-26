@@ -8,7 +8,8 @@ const menuController = {
     let toppings;
     try {
       toppings = await Topping.find({});
-    } catch (err) {
+    } 
+    catch (err) {
       const error = new HttpError(
         'Fetching menu toppings failed, please try again later.',
         500

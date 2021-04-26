@@ -128,6 +128,24 @@ const removeToppingHandler = (id) => {
   });
 } 
 
+
+
+
+  console.log(props);
+
+  const checkoutHandler = () => {
+
+    props.history.push({
+      pathname: 'place-order', 
+      state: {
+        order: orderState, 
+        menu: menuState.toppings
+      }
+    });
+
+  }
+
+
     // ERROR HANDLER 
 
     const errorHandler = () => {
@@ -145,21 +163,6 @@ const removeToppingHandler = (id) => {
 
   if (orderState.chosenToppings.length > 0){
     checkoutDisabled = false;
-  }
-
-
-  console.log(props);
-
-  const checkoutHandler = () => {
-
-    props.history.push({
-      pathname: 'place-order', 
-      state: {
-        order: orderState, 
-        menu: menuState.toppings
-      }
-    });
-
   }
 
 
