@@ -12,7 +12,6 @@ router.post('/login', userController.login);
 router.use(checkAuth);
 
 router.post('/checkout', orderController.createOrder);
-router.get('/orders', orderController.getAllOrders);
 router.get('/users/:uid', userController.getUserById);
 router.get('/orders/:uid', orderController.getOrdersByUserId);
 router.put('/updateuser/:uid', userController.updateUser);

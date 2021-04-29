@@ -34,9 +34,15 @@ const PizzaPal = (props) => {
         setMenuState({ toppings: sortedToppings });
       })
       .catch((error) => {
+        let errorMsg = "";
+        if (error.response) {
+          errorMsg = error.response.data.message;
+        } else {
+          errorMsg = "There was a problem fetching the menu";
+        }
         setErrorState({
           error: true,
-          errorMessage: error.response.data.message,
+          errorMessage: errorMsg,
         });
         setLoadingState({ isLoading: false, loadFailed: menuState.loadFailed });
         console.log(error.response);
