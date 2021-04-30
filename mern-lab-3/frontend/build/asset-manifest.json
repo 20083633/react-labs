@@ -1,0 +1,41 @@
+{
+  "files": {
+    "static/js/0.82e75217.chunk.js": "/static/js/0.82e75217.chunk.js",
+    "static/js/0.82e75217.chunk.js.map": "/static/js/0.82e75217.chunk.js.map",
+    "main.css": "/static/css/main.1ee31e8c.chunk.css",
+    "main.js": "/static/js/main.66c5fd1f.chunk.js",
+    "main.js.map": "/static/js/main.66c5fd1f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e50fcd69.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e50fcd69.js.map",
+    "static/css/3.d97c81c1.chunk.css": "/static/css/3.d97c81c1.chunk.css",
+    "static/js/3.abe398c9.chunk.js": "/static/js/3.abe398c9.chunk.js",
+    "static/js/3.abe398c9.chunk.js.map": "/static/js/3.abe398c9.chunk.js.map",
+    "static/js/4.9a951f3e.chunk.js": "/static/js/4.9a951f3e.chunk.js",
+    "static/js/4.9a951f3e.chunk.js.map": "/static/js/4.9a951f3e.chunk.js.map",
+    "static/js/5.c8f886b6.chunk.js": "/static/js/5.c8f886b6.chunk.js",
+    "static/js/5.c8f886b6.chunk.js.map": "/static/js/5.c8f886b6.chunk.js.map",
+    "static/js/6.8e38cfaf.chunk.js": "/static/js/6.8e38cfaf.chunk.js",
+    "static/js/6.8e38cfaf.chunk.js.map": "/static/js/6.8e38cfaf.chunk.js.map",
+    "static/js/7.662d6869.chunk.js": "/static/js/7.662d6869.chunk.js",
+    "static/js/7.662d6869.chunk.js.map": "/static/js/7.662d6869.chunk.js.map",
+    "static/js/8.be0c7246.chunk.js": "/static/js/8.be0c7246.chunk.js",
+    "static/js/8.be0c7246.chunk.js.map": "/static/js/8.be0c7246.chunk.js.map",
+    "static/js/9.c77bb954.chunk.js": "/static/js/9.c77bb954.chunk.js",
+    "static/js/9.c77bb954.chunk.js.map": "/static/js/9.c77bb954.chunk.js.map",
+    "static/js/10.f5c4eebc.chunk.js": "/static/js/10.f5c4eebc.chunk.js",
+    "static/js/10.f5c4eebc.chunk.js.map": "/static/js/10.f5c4eebc.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/3.d97c81c1.chunk.css.map": "/static/css/3.d97c81c1.chunk.css.map",
+    "static/css/main.1ee31e8c.chunk.css.map": "/static/css/main.1ee31e8c.chunk.css.map",
+    "static/js/3.abe398c9.chunk.js.LICENSE.txt": "/static/js/3.abe398c9.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/static/media/outline-icons.ddae9b1b.woff",
+    "static/media/logo.a8255238.png": "/static/media/logo.a8255238.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e50fcd69.js",
+    "static/css/3.d97c81c1.chunk.css",
+    "static/js/3.abe398c9.chunk.js",
+    "static/css/main.1ee31e8c.chunk.css",
+    "static/js/main.66c5fd1f.chunk.js"
+  ]
+}
