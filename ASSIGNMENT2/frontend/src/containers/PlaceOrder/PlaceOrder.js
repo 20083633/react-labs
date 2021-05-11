@@ -370,5 +370,5 @@ return (
     {orderForm}
 </React.Fragment>
 )
-
+};
 export default withRouter(PlaceOrder);
