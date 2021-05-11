@@ -4,88 +4,123 @@ import Menu from '../../components/Menu/Menu';
 import { Grid, Message } from 'semantic-ui-react';
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
+import Loader from '../../components/Feedback/Loader';
+import ErrorModal from '../../components/Feedback/ErrorModal';
 
-let orderFillings = [];
 
 const SalsSubs = (props) => {
   const [menuState, setMenuState] = useState({
     fillings: []
   });
 
+  const [errorState, setErrorState] = useState({
+    error: false, 
+    errorMessage: null
+  });
+
+  const [loadingState, setLoadingState] = useState({
+    isLoading: true, 
+    loadFailed: false
+  });
+
   useEffect(() => {
-    axios.get('/fillings.json')
+    axios.get('/')
     .then(response => {
-      setMenuState({fillings: response.data, error: false});
+      let sortedFillings = response.data.fillings.sort(function(a, b){return a.id - b.id});
+      setMenuState({fillings: sortedFillings});
     })
     .catch(error => {
-      setMenuState({fillings: menuState.fillings, error: true});
-      console.log(error);
+      let errorMsg = '';
+      if (error.response) {
+          errorMsg = error.response.data.message;
+      } else {
+          errorMsg = 'There was a problem loading the menu';
+      }
+
+      setErrorState({error: true, errorMessage: errorMsg});
+      setLoadingState({isLoading: false, loadFailed: menuState.loadFailed});
+      console.log(error.response);
     });
-}, [])
+  }, [])
 
 const [orderState, setOrderState] = useState({
-  totalPrice: 5, 
-  chosenFillings: []
-});
+  totalPrice: 
+    props.location.state ? 
+    props.location.state.order.totalPrice : 5, 
+  chosenFillings: 
+    props.location.state ? 
+    props.location.state.order.chosenFillings: []
+});  
+
+window.history.replaceState('/', undefined);
+
 
 const addFillingHandler = (id) => {
-  // find the chosen filling in the menu
+  let order = {...orderState};
+
+  // find the chosen topping in the menu
   const menuIndex = menuState.fillings.findIndex(filling => filling.id === id);
 
-// check if the filling has already been added to the orderFillings array
-const orderIndex = orderFillings.findIndex(filling => filling.id === id);
+// check if the topping has already been added to the orderToppings array
+const orderIndex = order.chosenFillings.findIndex(filling => filling.id === id);
 
 // if so, increase its count by 1
 if (orderIndex > -1){
-  orderFillings[orderIndex].count++;
+  order.chosenFillings[orderIndex].count++;
 }
-// otherwise (i.e. this filling is being added for the first time)
-// create this filling and add it to the order fillings array
+// otherwise (i.e. this topping is being added for the first time)
+// create this topping and add it to the order toppings array
 else{
-  // Save the id, name and price of the chosen filling; set its count to 1
+  // Save the id, name and price of the chosen topping; set its count to 1
   const chosenFilling = {
     id: menuState.fillings[menuIndex].id,
     name: menuState.fillings[menuIndex].alt,
     price: menuState.fillings[menuIndex].price,
     count: 1
   };
-  orderFillings.push(chosenFilling);
+  order.chosenFillings.push(chosenFilling);
 }
 
 // Calculate the new price
 const newPrice = orderState.totalPrice + menuState.fillings[menuIndex].price;
 
-// Update the order state with the new price and updated fillings array
+// Update the order state with the new price and updated toppings array
 setOrderState({
   totalPrice: newPrice,
-  chosenFillings: orderFillings
+  chosenFillings: order.chosenFillings
 });
 }
 
+
+// EVENT HANDLERS - REMOVE TOPPING
+
 const removeFillingHandler = (id) => {
-  // Find filling with matching id from the orderFillings
-  const index = orderFillings.findIndex(filling => filling.id === id);
 
-  // Get the current price
-  let price = orderState.totalPrice; 
+let order = {...orderState};
 
-  // If filling was found, update the price and decrease the count
-  if(index >= 0){
-    price = price - orderFillings[index].price;
-    orderFillings[index].count--;
+// Find topping with matching id from the orderToppings
+const index = order.chosenFillings.findIndex(filling => filling.id === id);
 
-    // If the count is now 0, remove the filling completely
-    if(orderFillings[index].count < 1){
-      orderFillings.splice(index, 1);
-    }
+// Get the current price
+let price = order.totalPrice; 
+
+// If topping was found, update the price and decrease the count
+if(index >= 0){
+  price = price - order.chosenFillings[index].price;
+  order.chosenFillings[index].count--;
+
+  // If the count is now 0, remove the topping completely
+  if(order.chosenFillings[index].count < 1){
+    order.chosenFillings.splice(index, 1);
   }
+}
 
-  // Update order state with updated price and updated fillings array
-  setOrderState({
-    totalPrice: price,
-    chosenFillings: orderFillings
-  });
-}   
+// Update order state with updated price and updated toppings array
+setOrderState({
+  totalPrice: price,
+  chosenFillings: order.chosenFillings
+});
+}  
 
 console.log(orderState);
 
@@ -100,64 +135,37 @@ const checkoutHandler = () => {
       menu: menuState.fillings
     }
   });
-/*
-    // get order from orderState
-    let order = orderState;
 
-    // add unique id
-    order.id = uuidv4();
-
-    // create formatted date
-    let orderDate = new Date();
-
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    let dayNum = orderDate.getDay();
-    let day = days[dayNum];
-
-    let monthNum = orderDate.getMonth();
-    let month = months[monthNum];
-
-    let date = orderDate.getDate();
-    let year = orderDate.getFullYear();
-
-    // saves date in the format "Fri 19 Mar 2021"
-    let formattedDate = day + " " + date + " " + month + " " + year;
-
-    // add formattedDate to order
-    order.date = formattedDate;
-
-    axios.post('/orders.json', order)
-    .then(response => {
-      alert('Order saved!');
-      // set order state and orderFillings back to starting values
-      setOrderState({
-        totalPrice: 5,
-        chosenFillings: []
-      });
-      orderFillings=[];
-  })
-    .catch(error => {
-    setMenuState({fillings: menuState.fillings, error: true});
-    alert('Something went wrong :(');
-    console.log(error);
-    });
-*/
 } 
+
+// ERROR HANDLER 
+
+const errorHandler = () => {
+  setErrorState({
+    error: false, 
+    errorMessage: null
+  });
+  setLoadingState({
+    isLoading: false,
+    loadFailed: true
+  });
+};
 
 let checkoutDisabled = true;
 
 if (orderState.chosenFillings.length > 0){
-  checkoutDisabled = false;
+checkoutDisabled = false;
 }
 
 
-let salssubsMenu = menuState.error ? <Message><p>Sals Subs menu can't be loaded!</p></Message> : <Message><p>Menu loading...</p></Message>;
+let salssubsMenu = 
+errorState.error ? 
+<ErrorModal error={errorState.errorMessage} onClear={errorHandler} /> : 
+<Loader active={loadingState.isLoading} />;
 
 if (menuState.fillings.length > 0) {
-  salssubsMenu = (
-      <Grid divided='vertically' stackable>
+salssubsMenu = (
+  <Grid divided='vertically' stackable>
       <Grid.Row centered>
           <Menu menu={menuState.fillings} />
       </Grid.Row>
@@ -170,8 +178,11 @@ if (menuState.fillings.length > 0) {
         checkout={checkoutHandler}
         disabled={checkoutDisabled}
       />
-      </Grid>
-  );
+  </Grid>
+);
+}
+else if (loadingState.loadFailed) {
+salssubsMenu = <p>We're having some issues loading the menu... Please try again later.</p>
 }
 
   return (
