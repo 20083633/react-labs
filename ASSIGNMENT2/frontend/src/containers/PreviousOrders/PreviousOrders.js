@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from '../../axios-orders';
 import OrdersTable from '../../components/OrdersTable/OrdersTable';
 import { Message } from 'semantic-ui-react';
 import Loader from '../../components/Feedback/Loader';
 import ErrorModal from '../../components/Feedback/ErrorModal';
+import AuthContext from "../../context/auth-context";
 
 const PreviousOrders = (props) => {
+  const auth = useContext(AuthContext);
 
   const [pastOrdersState, setPastOrdersState] = useState({
     orders: []
@@ -23,7 +25,9 @@ const [loadingState, setLoadingState] = useState({
 });
 
 useEffect(() => {
-  axios.get('/orders')
+  let uid = auth.userId;
+  let path = "/orders/" + uid;
+  axios.get(path, { headers: { Authorization: "Bearer " + auth.token } })
   .then(response => {
     setPastOrdersState({orders: response.data.orders});
     setLoadingState({isLoading: false, ordersLoaded: true, loadFailed: loadingState.loadFailed});
@@ -34,6 +38,8 @@ useEffect(() => {
     console.log(pastOrdersState.error, error);
   });
 }, [])
+
+
 
 // ERROR HANDLER 
 

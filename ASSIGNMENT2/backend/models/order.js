@@ -17,7 +17,8 @@ const orderSchema = new Schema({
         method: { type: String, required: true },
         name: { type: String, required: true },
         phone: { type: String, required: true },
-    }
+    },
+    userId: { type: mongoose.Types.ObjectId, required: true, ref: 'User'}
 });
 
 module.exports = mongoose.model('Order', orderSchema);
