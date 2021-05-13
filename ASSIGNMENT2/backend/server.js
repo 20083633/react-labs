@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const HttpError = require('./utils/http-error');
+const path = require('path');
 
 const app = express();
+
 app.use(bodyParser.json());
 
 app.use((request, response, next) => {
@@ -17,7 +19,11 @@ app.use((request, response, next) => {
   next();
 });
 
+app.use(express.static(path.join('public')));
 app.use('/api', routes); 
+app.use((request, response, next) => {
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
 
 app.use((request, response, next) => {
     const error = new HttpError('Could not find this route.', 404);
@@ -33,9 +39,9 @@ app.use((error, request, response, next) => {
 });
 
 mongoose
-  .connect('mongodb+srv://salssubs:salssubs@cluster0.qsldf.mongodb.net/salssubs?retryWrites=true&w=majority')
+  .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.qsldf.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
   .then(() => {
-    app.listen(5000);
+    app.listen(process.env.PORT || 5000);
   })
   .catch(err => {
     console.log(err);

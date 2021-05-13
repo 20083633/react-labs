@@ -104,10 +104,10 @@ const Account = (props) => {
       <Grid>
         <Grid.Row centered>
           <Grid.Column width={10}>
-            <Segment color="red">
+            <Segment color="green">
               <Grid divided>
                 <Grid.Column width={8}>
-                  <Header as="h3" textAlign="center" color="red">
+                  <Header as="h3" textAlign="center" color="green">
                     Your Details
                   </Header>
                   <List>
@@ -165,7 +165,7 @@ const Account = (props) => {
                 </Grid.Column>
                 <Grid.Column width={8} textAlign="center">
                   <Image
-                    src="https://img.jamieoliver.com/jamieoliver/recipe-database/oldImages/large/1474_2_1430128688.jpg?tr=w-800,h-1066"
+                    src="../images/sandwich.jpg"
                     rounded
                     size="large"
                   />

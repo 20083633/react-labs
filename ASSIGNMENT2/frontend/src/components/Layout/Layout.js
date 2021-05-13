@@ -1,18 +1,21 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import { Container } from 'semantic-ui-react';
 import { Route, Switch, useHistory } from "react-router-dom";
+import Loader from '../Feedback/Loader';
 
 import './Layout.css';
 
 import Nav from '../Nav/Nav';
 import SalsSubs from '../../containers/salssubs/salssubs';
-import PreviousOrders from '../../containers/PreviousOrders/PreviousOrders';
-import PlaceOrder from '../../containers/PlaceOrder/PlaceOrder';
-import Success from '../../containers/PlaceOrder/Success/Success';
-import Authenticate from "../../containers/Authenticate/Authenticate";
-import Account from "../../containers/Account/Account";
-import AccountUpdate from "../../containers/Account/AccountUpdate/AccountUpdate";
 import AuthContext from "../../context/auth-context";
+
+const PreviousOrders = React.lazy(() => import  ('../../containers/PreviousOrders/PreviousOrders'));
+const PlaceOrder = React.lazy(() => import  ('../../containers/PlaceOrder/PlaceOrder'));
+const Success = React.lazy(() => import  ('../../containers/PlaceOrder/Success/Success'));
+const Authenticate = React.lazy(() => import  ("../../containers/Authenticate/Authenticate"));
+const Account = React.lazy(() => import  ("../../containers/Account/Account"));
+const AccountUpdate = React.lazy(() => import  ("../../containers/Account/AccountUpdate/AccountUpdate"));
+
 
 let logoutTimer;
 
@@ -97,13 +100,9 @@ const Layout = (props) => {
     >
     <Container>
       <Nav />
-      <Route path="/" exact component={SalsSubs} />
-      <Route path="/authenticate" component={Authenticate} />
-    <Route path="/orders" component={PreviousOrders} />
-    <Route path="/place-order" component={PlaceOrder} />
-    <Route path="/success" component={Success} />
-    <Route path="/users/:uid" component={Account} />
-    <Route path="/update-account" component={AccountUpdate} />
+      <Suspense fallback={<div><Loader active='true' /></div>}>
+    {routes}
+    </Suspense>
     </Container>
     </AuthContext.Provider>
   )

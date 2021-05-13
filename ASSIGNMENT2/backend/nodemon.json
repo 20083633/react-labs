@@ -1,0 +1,8 @@
+{
+    "env": {
+        "DB_USER": "salssubs",
+        "DB_PASSWORD": "salssubs",
+        "DB_NAME": "salssubs",
+        "JWT_KEY": "very_secret_private_key"
+    }
+}

@@ -273,8 +273,8 @@ const Authenticate = (props) => {
   } else {
     if (isLoginMode) {
       authForm = (
-        <Segment color="red">
-          <Header as="h2" textAlign="center" color="red">
+        <Segment color="green">
+          <Header as="h2" textAlign="center" color="green">
             Already registered? Log In!
           </Header>
           <Form id="form">
@@ -312,11 +312,11 @@ const Authenticate = (props) => {
           </Form>
         </Segment>
       );
-      loginBtnColor = "red";
+      loginBtnColor = "green";
     } else {
       authForm = (
-        <Segment color="red">
-          <Header as="h2" textAlign="center" color="red">
+        <Segment color="green">
+          <Header as="h2" textAlign="center" color="green">
             First time here? Sign Up!
           </Header>
           <Form id="form">
@@ -363,7 +363,7 @@ const Authenticate = (props) => {
           </Form>
         </Segment>
       );
-      signupBtnColor = "red";
+      signupBtnColor = "green";
     }
   }
 

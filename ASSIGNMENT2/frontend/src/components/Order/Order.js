@@ -31,7 +31,7 @@ const Order = (props) => {
           <Header as="h2" inverted>
             Log in to start creating your pizza!
           </Header>
-          <Button as={Link} to="/authenticate" color="red" size="large">
+          <Button as={Link} to="/authenticate" color="green" size="large">
             Signup/Login
           </Button>
         </Dimmer>
