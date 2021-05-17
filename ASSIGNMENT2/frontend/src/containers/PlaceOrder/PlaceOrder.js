@@ -49,7 +49,7 @@ details:{
                 valid: false
             },
             {
-                id: 'form-input-method',
+                id: 'form-select-method',
                 message: 'Please choose collection or delivery',
                 required: true,
                 valid: false
@@ -159,8 +159,8 @@ details:{
 
         console.log(message);
 
-        // update state
-        setValidationState({rules: validation.rules, formValid: validation.formValid});
+      /*  // update state
+        setValidationState({rules: validation.rules, formValid: validation.formValid}); */
 
         let msgState = {...messageState};
 
@@ -171,7 +171,7 @@ details:{
             case "form-input-phone":
                 msgState.phone = message;
                 break;
-            case "form-input-method":
+            case "form-select-method":
                 msgState.method = message;
                 break;
             case "form-input-address":
@@ -213,7 +213,7 @@ details:{
                 customerDetails.phone = event.target.value;
                 validate(event.target.value, inputIdentifier, inputType);
                 break;
-            case "form-input-method":
+            case "form-select-method":
                 customerDetails.method = event.target.textContent;
                 validate(event.target.textContent, inputIdentifier, inputType);
                 break;
@@ -228,13 +228,15 @@ details:{
         setCustomerState({details: customerDetails});
     }
 
-    const checkoutHandler = () => {
-        // add user id
-        order.userId = auth.userId;
+    let disabled = !validationState.formValid;
 
+    const checkoutHandler = () => {
+        
         // get order from orderState
          let order = orderState;
 
+        // add user id
+         order.userId = auth.userId;
          // add unique id
          //order.id = uuidv4();
 
@@ -281,8 +283,6 @@ details:{
            });
      }
 
-     let disabled = !validationState.formValid;
-
          // ERROR HANDLER
 
     const errorHandler = () => {
@@ -305,8 +305,8 @@ details:{
     <Grid.Row columns={2}>
 
         <Grid.Column width={6}>
-            <Segment color='red'>
-                <Header as='h2' textAlign='center' color='red'>
+            <Segment color='green'>
+                <Header as='h2' textAlign='center' color='green'>
                     Confirm your order:
                 </Header>
                 <Summary 
@@ -314,13 +314,13 @@ details:{
                     chosenFillings = {orderState.chosenFillings}
                     totalPrice = {orderState.totalPrice}
                 />
-                <Button color="red" onClick={cancelHandler}>Go Back</Button>
+                <Button color="green" onClick={cancelHandler}>Go Back</Button>
             </Segment>
         </Grid.Column>
 
         <Grid.Column width={10}>
-            <Segment color='red'>
-                    <Header as='h2' textAlign='center' color='red'>
+            <Segment color='green'>
+                    <Header as='h2' textAlign='center' color='green'>
                         Enter your details:
                     </Header>
                     <Form>
@@ -338,7 +338,7 @@ details:{
                         label='Phone'
                         placeholder='Phone'
                         id='form-input-phone'
-                        onChange={(event) => formChangedHandler(event, 'form-input-name', 'input')}
+                        onChange={(event) => formChangedHandler(event, 'form-input-phone', 'input')}
                     />
                     <Form.Field
                         control={Select}
@@ -350,8 +350,8 @@ details:{
                             { key: 'd', text: 'Delivery', value: 'delivery' }
                         ]}
                         placeholder='Collection or Delivery'
-                        id='form-input-method'
-                        onChange={(event) => formChangedHandler(event, 'form-input-name', 'input')}
+                        id='form-select-method'
+                        onChange={(event) => formChangedHandler(event, 'form-select-method', 'select')}
                     />
                     <Form.Input
                         error={messageState.address}
@@ -360,7 +360,7 @@ details:{
                         label='Address'
                         placeholder='Address'
                         id='form-input-address'
-                        onChange={(event) => formChangedHandler(event, 'form-input-name', 'input')}
+                        onChange={(event) => formChangedHandler(event, 'form-input-address', 'input')}
                     />
                     <Button type='submit' color='green' disabled={disabled} onClick={checkoutHandler}>Submit</Button>
                 </Form>
