@@ -1,2 +1,0 @@
-(this.webpackJsonpsalssubs=this.webpackJsonpsalssubs||[]).push([[8],{223:function(s,e,r){"use strict";r.r(e);r(0);var c=r(192),t=r(105),n=r(2);e.default=function(s){return Object(n.jsx)(c.a,{color:"red",children:Object(n.jsx)(t.a,{as:"h2",textAlign:"center",color:"red",children:"Your Order has been placed!"})})}}}]);
-//# sourceMappingURL=8.1d4de2dc.chunk.js.map
